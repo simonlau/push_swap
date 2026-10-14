@@ -29,5 +29,4 @@ The Push Swap project is a algorithmic sorting challenge where the goal is to so
 
 ## See Also
 
-- [push_swap program details](./push_swap.md)
-- [Checker program](/Users/simon.lau/code/Push-swap/.agents/skills/karpathy-llm-wiki/raw/push-swap-project.md)
+- [Command Line Arguments in C](c-programming/command-line-arguments.md)
