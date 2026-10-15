@@ -9,7 +9,10 @@ CFLAGS   := -Wall -Wextra -Werror
 SRCS     := main.c \
             parser.c \
             stack.c \
-            operations.c \
+            ops_swap.c \
+            ops_push.c \
+            ops_rotate.c \
+            ops_reverse_rotate.c \
             sort_simple.c \
             sort_medium.c \
             sort_complex.c \
