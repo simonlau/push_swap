@@ -1,5 +1,9 @@
 # Knowledge Base Index
 
+## 42 School
+
+* [The Norm](wiki/42-school/the-norm.md) — Mandatory coding standard for 42 C projects: naming, formatting, forbidden constructs, and file organization rules
+
 ## C/C++ Programming
 
 * [Command Line Arguments in C](wiki/c-programming/command-line-arguments.md) — How C programs receive input at runtime via argc and argv

@@ -17,3 +17,11 @@
 - Updated: c-programming/variadic-functions.md
 
 ## [2026-10-14] lint | 6 issues found, 0 auto-fixed
+
+## [2026-10-16] ingest | The Norm (42 School Coding Standard)
+
+- Disposition: New
+- Raw: raw/42-school/2026-10-16-the-norm-v4.1.md
+- Updated: 42-school/the-norm
+
+## [2026-10-16] lint | 6 issues found, 0 auto-fixed
