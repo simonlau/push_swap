@@ -28,4 +28,45 @@ tstsuite("Utils") {
 		tstcheck(ft_max(5, 5) == 5);
 		tstcheck(ft_max(INT_MIN, INT_MAX) == INT_MAX);
 	}
+
+	tstcase("compute_disorder_sorted") {
+		t_stack *s = stack_init(4);
+		stack_push(s, 1);
+		stack_push(s, 2);
+		stack_push(s, 3);
+		tstcheck(compute_disorder(s) == 0.0);
+		stack_free(s);
+	}
+
+	tstcase("compute_disorder_reverse_sorted") {
+		t_stack *s = stack_init(4);
+		stack_push(s, 3);
+		stack_push(s, 2);
+		stack_push(s, 1);
+		tstcheck(compute_disorder(s) == 1.0);
+		stack_free(s);
+	}
+
+	tstcase("compute_disorder_partial") {
+		t_stack *s = stack_init(4);
+		stack_push(s, 2);
+		stack_push(s, 1);
+		stack_push(s, 3);
+		tstcheck(compute_disorder(s) > 0.0);
+		tstcheck(compute_disorder(s) < 1.0);
+		stack_free(s);
+	}
+
+	tstcase("compute_disorder_empty") {
+		t_stack *s = stack_init(3);
+		tstcheck(compute_disorder(s) == 0.0);
+		stack_free(s);
+	}
+
+	tstcase("compute_disorder_single") {
+		t_stack *s = stack_init(3);
+		stack_push(s, 42);
+		tstcheck(compute_disorder(s) == 0.0);
+		stack_free(s);
+	}
 }

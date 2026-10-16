@@ -49,6 +49,7 @@ void				select_strategy(t_stack *a, t_stack *b, int strategy);
 int					ft_abs(int n);
 int					ft_min(int a, int b);
 int					ft_max(int a, int b);
+double				compute_disorder(t_stack *a);
 
 int					checker_parse_args(int argc, char **argv, t_stack *a);
 
