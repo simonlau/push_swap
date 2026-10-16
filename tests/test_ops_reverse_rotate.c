@@ -8,7 +8,7 @@ tstsuite("Operations Reverse Rotate") {
 		stack_push(a, 3);
 		stack_push(a, 1);
 		rra(a);
-		tstcheck(stack_is_sorted(a) == 1);
+		tstcheck(compute_disorder(a) == 0.0);
 		stack_free(a);
 	}
 
@@ -18,7 +18,7 @@ tstsuite("Operations Reverse Rotate") {
 		stack_push(b, 3);
 		stack_push(b, 1);
 		rrb(b);
-		tstcheck(stack_is_sorted(b) == 1);
+		tstcheck(compute_disorder(b) == 0.0);
 		stack_free(b);
 	}
 
@@ -32,8 +32,8 @@ tstsuite("Operations Reverse Rotate") {
 		stack_push(b, 6);
 		stack_push(b, 4);
 		rrr(a, b);
-		tstcheck(stack_is_sorted(a) == 1);
-		tstcheck(stack_is_sorted(b) == 1);
+		tstcheck(compute_disorder(a) == 0.0);
+		tstcheck(compute_disorder(b) == 0.0);
 		stack_free(a);
 		stack_free(b);
 	}

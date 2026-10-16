@@ -25,7 +25,6 @@ typedef struct s_stack
 t_stack				*stack_init(unsigned int capacity);
 void				stack_push(t_stack *s, int value);
 void				stack_free(t_stack *s);
-int					stack_is_sorted(t_stack *s);
 int					parse_args(int argc, char **argv, t_stack *a);
 
 void				sa(t_stack *a);

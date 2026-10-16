@@ -5,34 +5,35 @@ tstsuite("Stack") {
 	tstcase("stack_init") {
 		t_stack *s = stack_init(5);
 		tstcheck(s != NULL);
-		tstcheck(stack_is_sorted(s) == 1);
+		tstcheck(compute_disorder(s) == 0.0);
 		stack_push(s, 3);
 		stack_push(s, 1);
-		tstcheck(stack_is_sorted(s) == 0);
+		tstcheck(compute_disorder(s) > 0.0);
 		stack_free(s);
 	}
 
-	tstcase("stack_is_sorted_empty") {
+	tstcase("compute_disorder_empty") {
 		t_stack *s = stack_init(3);
-		tstcheck(stack_is_sorted(s) == 1);
+		tstcheck(compute_disorder(s) == 0.0);
 		stack_free(s);
 	}
 
-	tstcase("stack_is_sorted_true") {
+	tstcase("compute_disorder_sorted") {
 		t_stack *s = stack_init(3);
-		stack_push(s, 1);
-		stack_push(s, 2);
-		stack_push(s, 3);
-		tstcheck(stack_is_sorted(s) == 1);
-		stack_free(s);
-	}
-
-	tstcase("stack_is_sorted_false") {
-		t_stack *s = stack_init(3);
-		stack_push(s, 3);
 		stack_push(s, 1);
 		stack_push(s, 2);
-		tstcheck(stack_is_sorted(s) == 0);
+		stack_push(s, 3);
+		tstcheck(compute_disorder(s) == 0.0);
+		stack_free(s);
+	}
+
+	tstcase("compute_disorder_partial") {
+		t_stack *s = stack_init(3);
+		stack_push(s, 3);
+		stack_push(s, 1);
+		stack_push(s, 2);
+		tstcheck(compute_disorder(s) > 0.0);
+		tstcheck(compute_disorder(s) < 1.0);
 		stack_free(s);
 	}
 }

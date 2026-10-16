@@ -8,11 +8,11 @@ tstsuite("Operations Push") {
 		stack_push(b, 3);
 		stack_push(b, 1);
 		pa(a, b);
-		tstcheck(stack_is_sorted(a) == 1);
-		tstcheck(stack_is_sorted(b) == 1);
+		tstcheck(compute_disorder(a) == 0.0);
+		tstcheck(compute_disorder(b) == 0.0);
 		pa(a, b);
-		tstcheck(stack_is_sorted(a) == 1);
-		tstcheck(stack_is_sorted(b) == 1);
+		tstcheck(compute_disorder(a) == 0.0);
+		tstcheck(compute_disorder(b) == 0.0);
 		stack_free(a);
 		stack_free(b);
 	}
@@ -23,11 +23,11 @@ tstsuite("Operations Push") {
 		stack_push(a, 3);
 		stack_push(a, 1);
 		pb(a, b);
-		tstcheck(stack_is_sorted(a) == 1);
-		tstcheck(stack_is_sorted(b) == 1);
+		tstcheck(compute_disorder(a) == 0.0);
+		tstcheck(compute_disorder(b) == 0.0);
 		pb(a, b);
-		tstcheck(stack_is_sorted(a) == 1);
-		tstcheck(stack_is_sorted(b) == 1);
+		tstcheck(compute_disorder(a) == 0.0);
+		tstcheck(compute_disorder(b) == 0.0);
 		stack_free(a);
 		stack_free(b);
 	}

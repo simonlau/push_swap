@@ -52,19 +52,3 @@ void	stack_free(t_stack *s)
 	free(s->data);
 	free(s);
 }
-
-int	stack_is_sorted(t_stack *s)
-{
-	unsigned int	i;
-
-	if (!s || s->size <= 1)
-		return (1);
-	i = 0;
-	while (i < s->size - 1)
-	{
-		if (s->data[i] > s->data[i + 1])
-			return (0);
-		i++;
-	}
-	return (1);
-}
