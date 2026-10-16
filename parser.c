@@ -13,6 +13,7 @@
 #include "push_swap.h"
 #include "libft/libft.h"
 #include <limits.h>
+#include <unistd.h>
 
 static int	has_duplicate(t_stack *a, int value)
 {
@@ -30,7 +31,7 @@ static int	has_duplicate(t_stack *a, int value)
 
 static int	report_error(void)
 {
-	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd("Error\n", STDERR_FILENO);
 	return (1);
 }
 

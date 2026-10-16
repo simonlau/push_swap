@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 #include "libft/libft.h"
+#include <unistd.h>
 
 static void	swap_top(t_stack *s)
 {
@@ -27,18 +28,18 @@ static void	swap_top(t_stack *s)
 void	sa(t_stack *a)
 {
 	swap_top(a);
-	ft_putstr_fd("sa\n", 1);
+	ft_putstr_fd("sa\n", STDOUT_FILENO);
 }
 
 void	sb(t_stack *b)
 {
 	swap_top(b);
-	ft_putstr_fd("sb\n", 1);
+	ft_putstr_fd("sb\n", STDOUT_FILENO);
 }
 
 void	ss(t_stack *a, t_stack *b)
 {
 	swap_top(a);
 	swap_top(b);
-	ft_putstr_fd("ss\n", 1);
+	ft_putstr_fd("ss\n", STDOUT_FILENO);
 }

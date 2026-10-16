@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 #include "libft/libft.h"
+#include <unistd.h>
 
 static void	rotate(t_stack *s)
 {
@@ -33,18 +34,18 @@ static void	rotate(t_stack *s)
 void	ra(t_stack *a)
 {
 	rotate(a);
-	ft_putstr_fd("ra\n", 1);
+	ft_putstr_fd("ra\n", STDOUT_FILENO);
 }
 
 void	rb(t_stack *b)
 {
 	rotate(b);
-	ft_putstr_fd("rb\n", 1);
+	ft_putstr_fd("rb\n", STDOUT_FILENO);
 }
 
 void	rr(t_stack *a, t_stack *b)
 {
 	rotate(a);
 	rotate(b);
-	ft_putstr_fd("rr\n", 1);
+	ft_putstr_fd("rr\n", STDOUT_FILENO);
 }
