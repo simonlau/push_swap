@@ -17,7 +17,7 @@ void	pa(t_stack *a, t_stack *b)
 {
 	if (!a || !b || b->size == 0)
 		return ;
-	stack_push(a, b->data[b->size - 1]);
+	stack_append(a, b->data[b->size - 1]);
 	b->size--;
 	ft_putstr_fd("pa\n", 1);
 }
@@ -26,7 +26,7 @@ void	pb(t_stack *a, t_stack *b)
 {
 	if (!a || !b || a->size == 0)
 		return ;
-	stack_push(b, a->data[a->size - 1]);
+	stack_append(b, a->data[a->size - 1]);
 	a->size--;
 	ft_putstr_fd("pb\n", 1);
 }

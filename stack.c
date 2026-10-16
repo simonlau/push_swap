@@ -35,7 +35,7 @@ t_stack	*stack_init(unsigned int capacity)
 	return (s);
 }
 
-void	stack_push(t_stack *s, int value)
+void	stack_append(t_stack *s, int value)
 {
 	if (!s)
 		return ;

@@ -77,7 +77,7 @@ int	parse_args(int argc, char **argv, t_stack *a)
 			ft_putstr_fd("Error\n", 2);
 			return (1);
 		}
-		stack_push(a, value);
+		stack_append(a, value);
 		i++;
 	}
 	return (0);
