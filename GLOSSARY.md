@@ -20,6 +20,10 @@ _Avoid_: parsing, sanitization
 The dispatch function that selects the appropriate sorting algorithm (simple, medium, complex, adaptive) based on stack size.
 _Avoid_: algorithm selector, sorter
 
+**Disorder**:
+A number between 0 and 1 measuring how far Stack a is from being sorted; 0 means already sorted, 1 means worst possible order. Computed as the inversion count divided by the total number of pairs, measured before any moves.
+_Avoid_: sortedness, chaos
+
 **Sort_simple**:
 Direct sorting of five or fewer elements using only swaps and rotations.
 _Avoid_: small sort, tiny sort
