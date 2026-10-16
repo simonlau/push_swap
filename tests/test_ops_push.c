@@ -31,4 +31,24 @@ tstsuite("Operations Push") {
 		stack_free(a);
 		stack_free(b);
 	}
+
+	tstcase("pa_empty_source") {
+		t_stack *a = stack_init(4);
+		t_stack *b = stack_init(4);
+		pa(a, b);
+		tstcheck(compute_disorder(a) == 0.0);
+		tstcheck(compute_disorder(b) == 0.0);
+		stack_free(a);
+		stack_free(b);
+	}
+
+	tstcase("pb_empty_source") {
+		t_stack *a = stack_init(4);
+		t_stack *b = stack_init(4);
+		pb(a, b);
+		tstcheck(compute_disorder(a) == 0.0);
+		tstcheck(compute_disorder(b) == 0.0);
+		stack_free(a);
+		stack_free(b);
+	}
 }
