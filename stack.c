@@ -37,20 +37,10 @@ t_stack	*stack_init(unsigned int capacity)
 
 void	stack_push(t_stack *s, int value)
 {
-	int				*new_data;
-	unsigned int	new_cap;
-
 	if (!s)
 		return ;
 	if (s->size >= s->capacity)
-	{
-		new_cap = s->capacity * 2;
-		new_data = (int *)realloc(s->data, sizeof(int) * new_cap);
-		if (!new_data)
-			return ;
-		s->data = new_data;
-		s->capacity = new_cap;
-	}
+		return ;
 	s->data[s->size] = value;
 	s->size++;
 }
