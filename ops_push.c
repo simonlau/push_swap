@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <unistd.h>
+#include "libft/libft.h"
 
 void	pa(t_stack *a, t_stack *b)
 {
@@ -19,7 +19,7 @@ void	pa(t_stack *a, t_stack *b)
 		return ;
 	stack_push(a, b->data[b->size - 1]);
 	b->size--;
-	write(1, "pa\n", 3);
+	ft_putstr_fd("pa\n", 1);
 }
 
 void	pb(t_stack *a, t_stack *b)
@@ -28,5 +28,5 @@ void	pb(t_stack *a, t_stack *b)
 		return ;
 	stack_push(b, a->data[a->size - 1]);
 	a->size--;
-	write(1, "pb\n", 3);
+	ft_putstr_fd("pb\n", 1);
 }
