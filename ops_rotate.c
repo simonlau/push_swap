@@ -15,7 +15,7 @@
 
 static void	rotate(t_stack *s)
 {
-	int		tmp;
+	int				tmp;
 	unsigned int	i;
 
 	if (!s || s->size < 2)

@@ -15,25 +15,29 @@
 
 t_stack	*stack_init(unsigned int capacity)
 {
-	t_stack	*s;
+	t_stack			*s;
+	unsigned int	real_cap;
 
 	s = (t_stack *)malloc(sizeof(t_stack));
 	if (!s)
 		return (NULL);
-	s->data = (int *)malloc(sizeof(int) * (capacity ? capacity : 1));
+	real_cap = capacity;
+	if (real_cap == 0)
+		real_cap = 1;
+	s->data = (int *)malloc(sizeof(int) * real_cap);
 	if (!s->data)
 	{
 		free(s);
 		return (NULL);
 	}
 	s->size = 0;
-	s->capacity = capacity ? capacity : 1;
+	s->capacity = real_cap;
 	return (s);
 }
 
 void	stack_push(t_stack *s, int value)
 {
-	int		*new_data;
+	int				*new_data;
 	unsigned int	new_cap;
 
 	if (!s)
