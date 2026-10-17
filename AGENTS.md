@@ -16,7 +16,7 @@ Single-context layout: one `GLOSSARY.md` plus `docs/adr/` at the repo root. See 
 
 This project follows the 42 School Norm (v4.1), documented in `wiki/42-school/the-norm.md`. Compliance is checked with `norminette`.
 
-Run norminette on the push_swap source files (not the `ft_printf` library):
+Run norminette on the push_swap source files (not the `ft_printf` library and also skip for `tests` files):
 
 ```
 norminette push_swap.h *.c
