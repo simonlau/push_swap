@@ -37,7 +37,7 @@ Chunk-based sorting that pushes elements to stack b in groups, sorts them, then 
 _Avoid_: medium sort, bucket sort
 
 **Sort_complex**:
-Radix sort that processes integers bit by bit for stacks larger than 100 elements.
+Radix sort that processes integers digit by digit for stacks larger than 100 elements.
 _Avoid_: large sort, radix-only sort
 
 **Sort_adaptive**:
