@@ -13,6 +13,9 @@ SRCS     := main.c \
             ops_push.c \
             ops_rotate.c \
             ops_reverse_rotate.c \
+            ops_count.c \
+            flags.c \
+            bench.c \
             sort_simple.c \
             sort_medium.c \
             sort_complex.c \
@@ -42,7 +45,7 @@ $(NAME): $(OBJS) $(LIB)
 	$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $(NAME)
 
 bonus: $(NAME) $(BONUS_OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(BONUS_OBJS) $(LIB) -o $(BONUS)
+	$(CC) $(CFLAGS) $(filter-out main.o,$(OBJS)) $(BONUS_OBJS) $(LIB) -o $(BONUS)
 
 test: $(NAME)
 	@for t in $(TEST_BINS); do \

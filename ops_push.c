@@ -14,54 +14,41 @@
 #include "libft/libft.h"
 #include <unistd.h>
 
-void	pa(t_stack *a, t_stack *b)
+void	stack_push(t_stack *dst, t_stack *src)
 {
 	int				value;
 	unsigned int	i;
 
-	if (!a || !b || b->size == 0)
+	if (!dst || !src || src->size == 0)
 		return ;
-	value = b->data[0];
+	value = src->data[0];
 	i = 0;
-	while (i < b->size - 1)
+	while (i < src->size - 1)
 	{
-		b->data[i] = b->data[i + 1];
+		src->data[i] = src->data[i + 1];
 		i++;
 	}
-	b->size--;
-	i = a->size;
+	src->size--;
+	i = dst->size;
 	while (i > 0)
 	{
-		a->data[i] = a->data[i - 1];
+		dst->data[i] = dst->data[i - 1];
 		i--;
 	}
-	a->data[0] = value;
-	a->size++;
+	dst->data[0] = value;
+	dst->size++;
+}
+
+void	pa(t_stack *a, t_stack *b)
+{
+	stack_push(a, b);
 	ft_putstr_fd("pa\n", STDOUT_FILENO);
+	op_count_inc(OP_PA);
 }
 
 void	pb(t_stack *a, t_stack *b)
 {
-	int				value;
-	unsigned int	i;
-
-	if (!a || !b || a->size == 0)
-		return ;
-	value = a->data[0];
-	i = 0;
-	while (i < a->size - 1)
-	{
-		a->data[i] = a->data[i + 1];
-		i++;
-	}
-	a->size--;
-	i = b->size;
-	while (i > 0)
-	{
-		b->data[i] = b->data[i - 1];
-		i--;
-	}
-	b->data[0] = value;
-	b->size++;
+	stack_push(b, a);
 	ft_putstr_fd("pb\n", STDOUT_FILENO);
+	op_count_inc(OP_PB);
 }

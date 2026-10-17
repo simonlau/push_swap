@@ -49,5 +49,5 @@ The program that sorts stack a using stack b and the eleven operations, printing
 _Avoid_: sorter, stack-sorter
 
 **Checker**:
-The bonus program that reads operations from stdin and verifies they sort stack a correctly, printing "OK" or "KO". Currently stubbed, reserved for future implementation.
+The bonus program that reads operations from stdin and verifies they sort stack a correctly, printing "OK" or "KO".
 _Avoid_: validator, verifier

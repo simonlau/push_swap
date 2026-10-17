@@ -11,55 +11,58 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "libft/libft.h"
+#include <unistd.h>
 
-static int	build_stacks(int argc, char **argv, t_stack **a, t_stack **b)
+static int	build_stacks(int new_argc, t_stack **a, t_stack **b)
 {
-	*a = stack_init((unsigned int)argc);
-	*b = stack_init((unsigned int)argc);
+	unsigned int	cap;
+
+	if (new_argc > 0)
+		cap = (unsigned int)new_argc;
+	else
+		cap = 1;
+	*a = stack_init(cap);
+	*b = stack_init(cap);
 	if (!*a || !*b)
 	{
 		stack_free(*a);
 		stack_free(*b);
-		return (1);
+		return (0);
 	}
-	if (argc > 1 && parse_args(argc, argv, *a) != 0)
-	{
-		stack_free(*a);
-		stack_free(*b);
-		return (1);
-	}
-	return (0);
+	return (1);
 }
 
-static void	run_strategy(t_stack *a, t_stack *b)
+static void	run_strategy(t_stack *a, t_stack *b, int strategy)
 {
-	double	disorder;
-	int		strategy;
-
-	disorder = compute_disorder(a);
-	if (disorder < 0.2)
-		strategy = 0;
-	else if (disorder < 0.5)
-		strategy = 1;
-	else
-		strategy = 2;
+	if (a->size <= 1)
+		return ;
+	op_count_reset();
 	select_strategy(a, b, strategy);
 }
 
 int	main(int argc, char **argv)
 {
-	t_stack	*a;
-	t_stack	*b;
+	t_flags		f;
+	t_stack		*a;
+	t_stack		*b;
+	double		disorder;
 
-	if (build_stacks(argc, argv, &a, &b) != 0)
+	f = parse_flags(argc, argv);
+	if (f.strategy < 0)
 		return (1);
-	if (a->size <= 1)
+	if (!build_stacks(f.new_argc, &a, &b))
+		return (1);
+	if (f.new_argc > 1 && parse_args(f.new_argc, argv, a) != 0)
 	{
 		stack_free(a);
 		stack_free(b);
-		return (0);
+		return (1);
 	}
-	run_strategy(a, b);
+	disorder = compute_disorder(a);
+	run_strategy(a, b, f.strategy);
+	if (f.bench)
+		print_bench(f.strategy, disorder, STDERR_FILENO);
 	stack_free(a);
 	stack_free(b);
 	return (0);

@@ -49,7 +49,46 @@ int					ft_abs(int n);
 int					ft_min(int a, int b);
 int					ft_max(int a, int b);
 double				compute_disorder(t_stack *a);
+typedef struct s_flags
+{
+	int				strategy;
+	int				bench;
+	int				new_argc;
+}					t_flags;
 
-int					checker_parse_args(int argc, char **argv, t_stack *a);
+typedef enum e_op
+{
+	OP_SA,
+	OP_SB,
+	OP_SS,
+	OP_PA,
+	OP_PB,
+	OP_RA,
+	OP_RB,
+	OP_RR,
+	OP_RRA,
+	OP_RRB,
+	OP_RRR,
+	OP_COUNT,
+}					t_op;
+
+void				op_count_reset(void);
+void				op_count_inc(t_op op);
+int					op_count_get(t_op op);
+int					op_count_total(void);
+
+void				swap_top(t_stack *s);
+void				stack_push(t_stack *dst, t_stack *src);
+void				rotate(t_stack *s);
+void				reverse_rotate(t_stack *s);
+
+int					read_op_line(char *buf, unsigned int size);
+int					apply_op_swap(t_stack *a, t_stack *b, const char *op);
+int					apply_op_push(t_stack *a, t_stack *b, const char *op);
+int					apply_op_rotate(t_stack *a, t_stack *b, const char *op);
+int					is_sorted_stack(t_stack *a);
+
+t_flags				parse_flags(int argc, char **argv);
+void				print_bench(int strategy, double disorder, int fd);
 
 #endif

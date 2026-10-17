@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-/* strategy values: 0 = simple, 1 = medium, 2 = complex (see main.c) */
+/* strategy values: 0 = simple, 1 = medium, 2 = complex, 3 = adaptive */
 void	select_strategy(t_stack *a, t_stack *b, int strategy)
 {
 	if (!a || !b)
@@ -21,6 +21,8 @@ void	select_strategy(t_stack *a, t_stack *b, int strategy)
 		sort_simple(a, b);
 	else if (strategy == 1)
 		sort_medium(a, b);
-	else
+	else if (strategy == 2)
 		sort_complex(a, b);
+	else
+		sort_adaptive(a, b);
 }

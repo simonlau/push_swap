@@ -1,5 +1,6 @@
 ft_printf
 push_swap
+checker
 tests/test_*
 !tests/test_*.c
 
