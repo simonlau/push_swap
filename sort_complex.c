@@ -10,131 +10,107 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "push_swap.h"
-#include <stdlib.h>
 
-static void	counting_pass(int *arr, unsigned int size, unsigned long divisor,
-		t_radix *r)
+static int	is_sorted(t_stack *a)
 {
 	unsigned int	i;
 
-	i = 0;
-	while (i < 10)
-		r->count[i++] = 0;
+	i = 1;
+	while (i < a->size)
+	{
+		if (a->data[i - 1] > a->data[i])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+static void	init_sorted(t_stack *a, int *sorted, unsigned int size)
+{
+	unsigned int	i;
+	unsigned int	j;
+	int				key;
+
 	i = 0;
 	while (i < size)
 	{
-		r->count[(arr[i] / divisor) % 10]++;
+		sorted[i] = a->data[i];
 		i++;
 	}
 	i = 1;
-	while (i < 10)
+	while (i < size)
 	{
-		r->count[i] += r->count[i - 1];
+		key = sorted[i];
+		j = i;
+		while (j > 0 && sorted[j - 1] > key)
+		{
+			sorted[j] = sorted[j - 1];
+			j--;
+		}
+		sorted[j] = key;
 		i++;
 	}
-	i = size;
-	while (i > 0)
-	{
-		i--;
-		r->out[--r->count[(arr[i] / divisor) % 10]] = arr[i];
-	}
-	ft_memcpy(arr, r->out, size * sizeof(int));
 }
 
-static void	radix_sort(int *arr, unsigned int size, int bias, t_radix *r)
+static unsigned int	rank_of(const int *sorted, unsigned int size, int value)
 {
-	int				max_val;
-	unsigned int	i;
-	unsigned long	divisor;
+	unsigned int	lo;
+	unsigned int	hi;
+	unsigned int	mid;
 
-	i = 0;
-	while (i < size)
-		arr[i++] += bias;
-	max_val = arr[0];
-	i = 1;
-	while (i < size)
+	lo = 0;
+	hi = size;
+	while (lo < hi)
 	{
-		if (arr[i] > max_val)
-			max_val = arr[i];
-		i++;
+		mid = (lo + hi) / 2;
+		if (sorted[mid] < value)
+			lo = mid + 1;
+		else
+			hi = mid;
 	}
-	divisor = 1;
-	while (divisor <= (unsigned long)max_val)
-	{
-		counting_pass(arr, size, divisor, r);
-		divisor *= 10;
-	}
-	i = 0;
-	while (i < size)
-		arr[i++] -= bias;
+	return (lo);
 }
 
-static void	place_sorted(t_stack *a, t_stack *b, const int *sorted,
-		unsigned int size)
+static void	radix_pass(t_stack *a, t_stack *b, const int *sorted)
 {
-	unsigned int	i;
-	unsigned int	idx;
-
-	i = 0;
-	while (i < size)
-	{
-		idx = 0;
-		while (idx < a->size && a->data[idx] != sorted[i])
-			idx++;
-		if (idx == a->size)
-			return ;
-		while (a->data[0] != sorted[i])
-			rra(a);
-		pb(a, b);
-		i++;
-	}
-	while (b->size)
-		pa(a, b);
-}
-
-static int	init_array(t_stack *a, int *arr, unsigned int size)
-{
-	int				min_val;
+	unsigned int	size;
+	unsigned int	passes;
+	unsigned int	bit;
 	unsigned int	i;
 
-	min_val = a->data[0];
-	i = 0;
-	while (i < size)
+	size = a->size;
+	passes = 0;
+	while ((size - 1) >> passes)
+		passes++;
+	bit = 0;
+	while (bit < passes)
 	{
-		arr[i] = a->data[i];
-		if (a->data[i] < min_val)
-			min_val = a->data[i];
-		i++;
+		i = 0;
+		while (i < size)
+		{
+			if ((rank_of(sorted, size, a->data[0]) >> bit) & 1)
+				ra(a);
+			else
+				pb(a, b);
+			i++;
+		}
+		while (b->size > 0)
+			pa(a, b);
+		bit++;
 	}
-	return (min_val);
 }
 
 void	sort_complex(t_stack *a, t_stack *b)
 {
-	int				*sorted;
-	int				bias;
-	t_radix			r;
-	unsigned int	size;
+	int	*sorted;
 
-	if (!a || a->size <= 1)
+	if (!a || a->size <= 1 || is_sorted(a))
 		return ;
-	size = a->size;
-	sorted = (int *)malloc(sizeof(int) * size);
-	r.count = (int *)malloc(sizeof(int) * 10);
-	r.out = (int *)malloc(sizeof(int) * size);
-	if (!sorted || !r.count || !r.out)
-	{
-		free(sorted);
-		free(r.count);
-		free(r.out);
+	sorted = (int *)malloc(sizeof(int) * a->size);
+	if (!sorted)
 		return ;
-	}
-	bias = -init_array(a, sorted, size);
-	radix_sort(sorted, size, bias, &r);
-	place_sorted(a, b, sorted, size);
+	init_sorted(a, sorted, a->size);
+	radix_pass(a, b, sorted);
 	free(sorted);
-	free(r.count);
-	free(r.out);
 }

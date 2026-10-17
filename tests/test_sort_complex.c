@@ -12,6 +12,7 @@
 
 #include "tst.h"
 #include "../push_swap.h"
+#include <unistd.h>
 
 static void	fill_stack(t_stack *a, const int *values, unsigned int count)
 {
@@ -54,6 +55,60 @@ static void	permute(int *values, unsigned int count)
 		values[j] = tmp;
 		i++;
 	}
+}
+
+static int	is_op(const char *tok)
+{
+	static const char	*ops[] = {"sa", "sb", "ss", "pa", "pb", "ra", "rb",
+		"rr", "rra", "rrb", "rrr", NULL};
+	int					i;
+
+	i = 0;
+	while (ops[i])
+	{
+		if (strcmp(tok, ops[i]) == 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+static long	capture_sort(t_stack *a, t_stack *b, int *valid)
+{
+	FILE	*f;
+	int		fd;
+	int		saved;
+	char	buf[65536];
+	ssize_t	n;
+	long	lines;
+	char	*tok;
+
+	*valid = 1;
+	f = tmpfile();
+	if (!f)
+		return (-1);
+	fd = fileno(f);
+	saved = dup(STDOUT_FILENO);
+	dup2(fd, STDOUT_FILENO);
+	sort_complex(a, b);
+	fflush(NULL);
+	dup2(saved, STDOUT_FILENO);
+	close(saved);
+	n = pread(fd, buf, sizeof(buf) - 1, 0);
+	if (n < 0)
+		n = 0;
+	buf[n] = '\0';
+	lines = 0;
+	tok = strtok(buf, "\n");
+	while (tok)
+	{
+		if (!is_op(tok))
+			*valid = 0;
+		lines++;
+		tok = strtok(NULL, "\n");
+	}
+	fclose(f);
+	return (lines);
 }
 
 tstsuite("Sort Complex") {
@@ -212,6 +267,37 @@ tstsuite("Sort Complex") {
 			tstcheck(a->data[i] == (int)i - 60);
 			i++;
 		}
+		stack_free(a);
+		stack_free(b);
+	}
+
+	tstcase("sort_complex_emits_only_valid_operations") {
+		t_stack *a;
+		t_stack *b;
+		int		values[200];
+		unsigned int	i;
+		unsigned int	n;
+		long		ops;
+		int			valid;
+
+		n = 200;
+		i = 0;
+		while (i < n)
+		{
+			values[i] = (int)i - 100;
+			i++;
+		}
+		permute(values, n);
+		a = stack_init(n);
+		b = stack_init(n);
+		fill_stack(a, values, n);
+		ops = capture_sort(a, b, &valid);
+		tstcheck(valid);
+		tstcheck(a->size == n);
+		tstcheck(b->size == 0);
+		tstcheck(is_sorted(a));
+		tstcheck(ops > 0);
+		tstcheck(ops < 3400);
 		stack_free(a);
 		stack_free(b);
 	}

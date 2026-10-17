@@ -22,12 +22,6 @@ typedef struct s_stack
 	unsigned int	capacity;
 }					t_stack;
 
-typedef struct s_radix
-{
-	int				*count;
-	int				*out;
-}					t_radix;
-
 t_stack				*stack_init(unsigned int capacity);
 void				stack_append(t_stack *s, int value);
 void				stack_free(t_stack *s);

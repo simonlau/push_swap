@@ -37,8 +37,8 @@ Chunk-based sorting that pushes elements to stack b in groups, sorts them, then 
 _Avoid_: medium sort, bucket sort
 
 **Sort_complex**:
-Radix sort that processes integers digit by digit for stacks larger than 100 elements.
-_Avoid_: large sort, radix-only sort
+Rank-normalized binary LSD radix sort for stacks larger than 100 elements; values are ranked by inspection, then bit passes run least-significant first, moving elements between the two stacks solely with the eleven operations.
+_Avoid_: large sort, digit sort
 
 **Sort_adaptive**:
 Size-based dispatch that routes to sort_simple, sort_medium, or sort_complex depending on element count.
