@@ -4,9 +4,9 @@
 
 **Blocked by:** 01: Stack primitives & Operations
 
-**Status:** ready-for-agent
+**Status:** closed
 
-- [ ] A Stack of 5–100 elements sorts to ascending order
-- [ ] Chunk count scales with stack size (√n chunks, not a fixed literal)
-- [ ] Only the eleven operations are used; each prints its name to stdout
-- [ ] Existing `test_sort_medium` tests pass
+- [x] A Stack of 5–100 elements sorts to ascending order
+- [x] Chunk count scales with stack size (√n chunks, not a fixed literal)
+- [x] Only the eleven operations are used; each prints its name to stdout
+- [x] Existing `test_sort_medium` tests pass, plus a test asserting only valid operations are emitted with a bounded operation count
