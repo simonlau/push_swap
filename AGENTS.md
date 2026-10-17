@@ -24,6 +24,8 @@ norminette push_swap.h *.c
 
 All `.c` and `.h` files directly in the repo root as well as the `tests` folder must pass with no errors before the work is considered complete.
 
+**Formatting workflow**: after saving any `.c` file, run `c_formatter_42 <file.c>` to format according to the norm, then run `norminette` (only on files in the root folder) to verify compliance. `c_formatter_42` is available at `~/.local/share/mise/installs/python/latest/bin/c_formatter_42`.
+
 ## Allowed Functions
 
 Besides the functions provided by `libftprintf.a` (compiled from `ft_printf/libft/`), the only permitted C library functions in push_swap source are:
@@ -36,5 +38,5 @@ Besides the functions provided by `libftprintf.a` (compiled from `ft_printf/libf
 
 Reuse libft functions wherever possible instead of reimplementing them. Useful libft functions for this project include `ft_atoi`, `ft_isdigit`, `ft_itoa`, `ft_putnbr_fd`, `ft_strlen`, `ft_strncmp`, `ft_split`, `ft_calloc`, `ft_strdup`, and `ft_strchr` — all declared in `ft_printf/libft/libft.h`. Include `ft_printf/libft/libft.h` where needed; `libftprintf.a` is linked automatically by the Makefile.
 
-Do not call any other libc functions (e.g., `printf`, `atoi`, `itoa`, `calloc` directly). Use `ft_putchar_fd`, `ft_putchar_fd`, `ft_putendl_fd`, `ft_putnbr_fd` for output and `ft_*` equivalents from libft for everything else.
+Do not call any other libc functions (e.g., `printf`, `atoi`, `itoa`, `calloc` directly). Use `ft_putchar_fd`, `ft_putendl_fd`, `ft_putnbr_fd` for output and `ft_*` equivalents from libft for everything else.
 
