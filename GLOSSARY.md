@@ -8,6 +8,10 @@ The context is the 42 school push_swap project: sorting a stack of integers usin
 A fixed-capacity array of integers with a size count, representing one of the two piles (a or b).
 _Avoid_: pile, list, deque
 
+**Top of stack**:
+The first element of the stack array, stored at index 0; the element that operations act on first.
+_Avoid_: last element, bottom of stack
+
 **Operation**:
 One of the eleven allowed instructions (sa, sb, ss, pa, pb, ra, rb, rr, rra, rrb, rrr) that mutates one or both stacks; each is printed to stdout when executed.
 _Avoid_: instruction, command, move
