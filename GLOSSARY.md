@@ -29,7 +29,7 @@ A number between 0 and 1 measuring how far Stack a is from being sorted; 0 means
 _Avoid_: sortedness, chaos
 
 **Sort_simple**:
-Direct sorting of five or fewer elements using only swaps and rotations.
+Direct sorting of five or fewer elements using selection/min-max extraction (swaps, rotations, and pushes between the two stacks).
 _Avoid_: small sort, tiny sort
 
 **Sort_medium**:
